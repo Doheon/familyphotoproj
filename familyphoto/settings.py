@@ -27,7 +27,7 @@ SECRET_KEY = '2+6mlq#o%_q3=d&%fw%@#92e-yq9v*v$kvy*$at$#(j%v-@qdm'
 # DEBUG = True
 DEBUG = False
 
-ALLOWED_HOSTS = ["doheon.pythonanywhere.com"]
+ALLOWED_HOSTS = ["*", "doheon.pythonanywhere.com"]
 
 
 # Application definition
