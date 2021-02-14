@@ -1,0 +1,179 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Family Photo Classifier</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'css/index.css' %}">
+
+        <script type = "text/javascript" src ="{% static 'js/jquery.js' %}"></script>
+        <script src="{% static 'js/Chart.js' %}"></script>
+
+    </head>
+
+    <body>
+        <div class = "header">
+            <div class = "home">
+                <h1 class = "home">Family Photo Classifier</h1>   
+            </div>
+        </div>
+
+
+        <form  method = "POST" enctype="multipart/form-data" novalidate>{% csrf_token%}
+            <!-- {{UploadFileForm.as_p}} -->
+            <div>
+                <div style="width:49%; text-align:right; display: inline-block;">
+                    <img id="uploadPreview" style="width: 200px; height: 200px;" class = "m-3" />
+                </div>
+                <div style="width: 49%; display: inline-block;">
+                    <div style="height: 50px;">
+                        <input type="file" id="uploadImage" name = "getImage" accept="image/*" capture = "camera" onchange="PreviewImage();"/>
+                        <script type="text/javascript">
+                            function PreviewImage() {
+                                var oFReader = new FileReader();
+                                oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+                        
+                                oFReader.onload = function (oFREvent) {
+                                    document.getElementById("uploadPreview").src = oFREvent.target.result;
+                                };
+                            };
+                        </script>
+                    </div>
+
+                    <div style="height:50px; display:inline-block;">
+                        <button type = "submit">upload</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        
+
+
+        <div style="text-align: center;" class = "contents mt-3">
+            <div style="display: inline-block;">
+                <div style="width: 300px; height: 300px; float: left; ">
+                    {% if src %}<img src="{{src}}" alt="preview" width="200" height = "200"> 
+                    {% else %} <img width="200" height = "200">{% endif %}
+                </div>
+
+                <div style="width: 300px; float:left;">
+                    <canvas id="myChart" width="300" height="200"></canvas><script>var ctx = document.getElementById("myChart");
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ["누나", "나", "아빠", "엄마"],
+                            datasets: [{
+                                label: '# of Votes',
+                                data: ["{{sis}}", "{{me}}", "{{fa}}", "{{ma}}"],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                ],
+                                borderColor: [
+                                    'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    </script>
+                </div>
+                <div style="width: 80px; float:left; text-align: center;font-weight: bold;font-size: 15px;">
+                    <br>
+                    누나  <br><br>
+                    나  <br><br>
+                    아빠   <br><br>
+                    엄마  <br><br>
+                </div>
+                <div style="width: 80px; float:left; text-align: center;font-weight: bold;font-size: 15px;">
+                    <br>
+
+                    {% if sis %} {{sis}} %  {% else %} 0% {% endif %}<br><br>
+                    {% if me %} {{me}} % {% else %} 0% {% endif %}<br><br>
+                    {% if fa %} {{fa}} % {% else %} 0% {% endif %}<br><br>
+                    {% if ma %} {{ma}} % {% else %} 0% {% endif %}<br><br>
+                </div>
+                <div style="width: 160px; height: 200px; float:left; text-align: center;font-weight: bold;font-size: 25px;">
+                    <div style="display: inline-block; margin-top: 50%;">
+                        예측: {{predict}}
+                    </div>
+                </div>
+            </div>
+
+            <div style="width: 510px; display: inline-block; margin-top: 200px;">
+                
+                {% for l in li %}
+                
+                <div style="width: 200px; height: 200px; float: left;">
+                    
+                    <img src= {{l.src}} alt="preview" width="200" height = "200">
+                    
+                </div>
+
+                <div style="width: 300px; float:left;">
+                    {{l.name}}
+                    <canvas id="{{l.name}}" width="300" height="180"></canvas><script>var ctx = document.getElementById("{{l.name}}");
+                    var chart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ["누나", "나", "아빠", "엄마"],
+                            datasets: [{
+                                label: '# of Votes',
+                                data: ["{{l.sis}}", "{{l.me}}", "{{l.fa}}", "{{l.ma}}"],
+                                backgroundColor: [
+                                    'rgba(255, 99, 132, 0.2)',
+                                    'rgba(54, 162, 235, 0.2)',
+                                    'rgba(255, 206, 86, 0.2)',
+                                    'rgba(75, 192, 192, 0.2)',
+                                ],
+                                borderColor: [
+                                    'rgba(255,99,132,1)',
+                                    'rgba(54, 162, 235, 1)',
+                                    'rgba(255, 206, 86, 1)',
+                                    'rgba(75, 192, 192, 1)',
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                    </script>
+                </div>
+                {% endfor %}
+
+
+            </div>
+
+        </div>
+        
+
+    </body>
+
+
+
+
+</html>

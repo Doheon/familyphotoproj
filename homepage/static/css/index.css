@@ -1,0 +1,30 @@
+/* div{
+    border: 1px solid red;
+} */
+
+body{
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(242, 242, 242);
+}
+
+.home{
+    font-weight: bold;
+    display: inline-block;
+    font-size: 23px;
+}
+
+.header{
+    font-family:Verdana;
+    margin: 0;
+    text-align: left;
+    color: white;
+    background-color: rgb(62, 62, 62);
+    padding:20px;
+    padding-left: 70px;
+}
+
+@media(max-width:830px){
+    .contents{
+        width:830px;
+    }
+}
