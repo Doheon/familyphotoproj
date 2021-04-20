@@ -4,9 +4,13 @@ pytorch, django를 이용하여 제작한 가족사진 분류 web applicaiton.
 
 사진을 첨부하면 그 사진이 4명의 가족 구성원중 누구인지 확률로 알려준다.  
 
+Object Detection을 이용해 더 성능이 좋아진 v2가 개발되었다.  
+
+[Family Photo Classifier V2](https://github.com/Doheon/familyphotoprojV2)
 
 
-## 구동화면
+
+## 동작화면
 
 | ![1](README.assets/2.png) | ![2](README.assets/1.png) |
 | :-----------------------: | :-----------------------: |
@@ -49,7 +53,7 @@ pytorch, django를 이용하여 제작한 가족사진 분류 web applicaiton.
 - torchvision의 resnet18을 사용하여 훈련을 진행하였고, 마지막 fc layer의 output의 개수를 4개로 설정하여 4개의 class에 대해 훈련을 진행할 수 있도록 했다.
 - loss function은 CrossEntropyLoss를 이용하여 multi-class classification을 해결하도록 했다.
 - optimizer는 SGD, learning rate는 0.001을 이용하였다.
-- loss가 적절히 수렴할때 까지 opoch를 조절하면서 훈련을 진행하였다.
+- loss가 적절히 수렴할때 까지 epoch를 조절하면서 훈련을 진행하였다.
 
 &nbsp;
 
@@ -83,13 +87,13 @@ pytorch, django를 이용하여 제작한 가족사진 분류 web applicaiton.
 
 - train set에 없는 데이터에 대해서는 만족할만한 정확도를 보이지 않는다.
 
-- 독사진에만 사용이 가능하기 때문에 어차피 독사진들을 분류해야하기 때문에 완벽한 자동 분류가 불가능하다.
+- 독사진에만 사용이 가능하기 때문에 어차피 독사진들을 분류해야 해서 완벽한 자동 분류가 불가능하다.
 
 - 독사진에만 사용이 가능하기 때문에 가족들이 여러명 있는 사진에는 사용이 불가능하다.
 
 - 우리 가족이 없는 음식이나 풍경사진을 직접 제외해줘야 한다.
 
-- 독사진 이어도 사진에 우리가족이 아닌 다른사람이 섞여 있으면 결과예측에 혼란이 생긴다.
+- 독사진이어도 사진에 우리가족이 아닌 다른사람이 섞여 있으면 결과예측에 혼란이 생긴다.
 
 
 
@@ -101,3 +105,6 @@ pytorch, django를 이용하여 제작한 가족사진 분류 web applicaiton.
 
 만약 사진에서 object detection을 하고 그 후에 classification을 하면 원하는 기능을 구현할 수 있을 것이라고 생각된다.
 
+이 방법으로 개선한 version2를 제작하였다.  
+
+[Family Photo Classifier V2](https://github.com/Doheon/familyphotoprojV2)  
