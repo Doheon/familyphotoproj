@@ -21,12 +21,13 @@
 
 
         <form  method = "POST" enctype="multipart/form-data" novalidate>{% csrf_token%}
-            <!-- {{UploadFileForm.as_p}} -->
+            
             <div>
                 <div style="width:49%; text-align:right; display: inline-block;">
                     <img id="uploadPreview" style="width: 200px; height: 200px;" class = "m-3" />
                 </div>
                 <div style="width: 49%; display: inline-block;">
+                    <!-- {{UploadFileForm.as_p}} -->
                     <div style="height: 50px;">
                         <input type="file" id="uploadImage" name = "getImage" accept="image/*" capture = "camera" onchange="PreviewImage();"/>
                         <script type="text/javascript">
@@ -40,6 +41,7 @@
                             };
                         </script>
                     </div>
+                    <!-- <input type="text"/> -->
 
                     <div style="height:50px; display:inline-block;">
                         <button type = "submit">upload</button>
@@ -116,6 +118,7 @@
                 </div>
             </div>
 
+            <div>
             <div style="width: 510px; display: inline-block; margin-top: 200px;">
                 
                 {% for l in li %}
@@ -164,8 +167,7 @@
                     </script>
                 </div>
                 {% endfor %}
-
-
+            </div>
             </div>
 
         </div>

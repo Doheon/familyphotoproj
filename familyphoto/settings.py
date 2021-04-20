@@ -24,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = '2+6mlq#o%_q3=d&%fw%@#92e-yq9v*v$kvy*$at$#(j%v-@qdm'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -125,7 +125,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, "homepage", "static")
 
-
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+DATA_UPLOAD_MAX_MEMORY_SIZE = 5242880

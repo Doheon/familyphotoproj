@@ -64,6 +64,7 @@ def index(request):
         image = request.FILES.get('getImage','')
         if image:
             fs = FileSystemStorage()
+
             shutil.rmtree('./media/')
 
             filename  = fs.save("0/" + image.name, image)
